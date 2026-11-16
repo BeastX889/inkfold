@@ -1,0 +1,42 @@
+{
+  "id": "/inkfold/",
+  "name": "Inkfold – PDF & Image Toolbox",
+  "short_name": "Inkfold",
+  "description": "Sign, merge, split, compress and protect PDFs, and convert images. Works offline; files never leave your device.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f4f8",
+  "theme_color": "#4f46e5",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities", "business"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "file_handlers": [
+    {
+      "action": "./",
+      "accept": { "application/pdf": [".pdf"] },
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }],
+      "launch_type": "single-client"
+    },
+    {
+      "action": "./",
+      "accept": {
+        "image/png": [".png"],
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/webp": [".webp"]
+      },
+      "launch_type": "single-client"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Sign & fill", "url": "./#sign", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Merge PDFs", "url": "./#merge", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Compress PDF", "url": "./#compress", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "launch_handler": { "client_mode": "focus-existing" }
+}
