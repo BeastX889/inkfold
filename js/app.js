@@ -15,6 +15,8 @@ import imgconvert from './tools/imgconvert.js';
 import crop from './tools/crop.js';
 import cutout from './tools/cutout.js';
 import { about } from './about.js';
+import { initTips, onTipsReady, openSupport } from './support.js';
+import { isAppWindow, showLanding } from './gate.js';
 
 export const APP_NAME = 'Inkfold';
 const TOOLS = [sign, merge, organize, split, compress, protect, unlock, watermark, numbers, img2pdf, pdf2img, imgconvert, crop, cutout];
@@ -162,16 +164,33 @@ function setupTheme() {
 }
 
 /* ---------- boot ---------- */
-buildRail();
-setupTheme();
-setupGlobalDrop();
-window.addEventListener('hashchange', route);
-route();
-window.addEventListener('unhandledrejection', e => {
-  console.error(e.reason);
-  toast((e.reason && e.reason.message) || 'Something went wrong.', 'err');
-});
 const devHost = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && !location.search.includes('sw=1');
 if ('serviceWorker' in navigator && location.protocol !== 'file:' && !devHost) {
   navigator.serviceWorker.register('sw.js').catch(() => { /* offline cache is optional */ });
+}
+if (!isAppWindow()) {
+  showLanding({
+    name: APP_NAME, tagline: 'PDF & Image Toolbox', icon: 'icons/icon-192.png',
+    storeUrl: 'https://apps.microsoft.com/detail/9NWF6WZT4Q6G',
+    blurb: 'Sign, merge, split, compress and protect PDFs, and convert or tidy up images. Everything runs on your PC: files are never uploaded.',
+    features: [
+      ['Sign & fill', 'Add your signature, text, dates and ticks to any PDF.'],
+      ['Merge, split, organize', 'Combine files, pull out pages, reorder and rotate.'],
+      ['Compress & protect', 'Shrink PDFs for email and lock them with a password.'],
+      ['Images', 'Convert, resize, crop, and clean up scanned signatures.'],
+    ],
+  });
+} else {
+  buildRail();
+  setupTheme();
+  setupGlobalDrop();
+  window.addEventListener('hashchange', route);
+  route();
+  window.addEventListener('unhandledrejection', e => {
+    console.error(e.reason);
+    toast((e.reason && e.reason.message) || 'Something went wrong.', 'err');
+  });
+  $('#supportBtn').addEventListener('click', openSupport);
+  onTipsReady(() => { $('#supportBtn').hidden = false; if (location.hash === '#about') route(); });
+  initTips(APP_NAME);
 }

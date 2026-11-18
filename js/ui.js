@@ -1,5 +1,6 @@
 // Small DOM + UI helpers shared by every tool.
 import { icon } from './icons.js';
+import { countSave, tipLine } from './support.js';
 
 export function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -172,7 +173,9 @@ export async function finishSave(container, data, name, again, extra = '') {
   const r = await saveFile(data, name);
   if (!r.saved) return false;
   container.querySelector('.result')?.remove();
+  container.querySelector('.tip-line')?.remove();
   container.append(resultBox('Saved ' + r.name, fmtBytes(r.size) + (extra ? ' · ' + extra : ''), again));
+  if (countSave()) container.append(tipLine());
   toast('Saved ' + r.name);
   return true;
 }

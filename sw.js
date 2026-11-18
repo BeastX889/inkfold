@@ -1,8 +1,8 @@
 // Offline cache: every app file is cached on install, then served cache-first.
-const VERSION = 'inkfold-v1.0.0';
+const VERSION = 'inkfold-v1.1.0';
 const FILES = [
   './', 'index.html', 'privacy.html', 'styles.css', 'manifest.webmanifest',
-  'js/app.js', 'js/ui.js', 'js/icons.js', 'js/pdf.js', 'js/sigpad.js', 'js/about.js',
+  'js/app.js', 'js/ui.js', 'js/icons.js', 'js/pdf.js', 'js/sigpad.js', 'js/about.js', 'js/support.js', 'js/gate.js',
   'js/tools/merge.js', 'js/tools/organize.js', 'js/tools/split.js', 'js/tools/sign.js', 'js/tools/compress.js',
   'js/tools/protect.js', 'js/tools/unlock.js', 'js/tools/watermark.js', 'js/tools/numbers.js',
   'js/tools/img2pdf.js', 'js/tools/pdf2img.js', 'js/tools/imgconvert.js', 'js/tools/crop.js', 'js/tools/cutout.js',
